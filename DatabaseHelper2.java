@@ -45,6 +45,20 @@ public class DatabaseHelper {
         String query = "SELECT avg_sunlight_hours_per_day FROM SolarIntensity WHERE state_name = ? AND district_name = ?";
         return fetchDouble(query, state, district);
     }
+  
+    private static ResultSet executeQuery(String query) throws SQLException {
+        Connection con = getConnection();
+        Statement stmt = con.createStatement();
+        return stmt.executeQuery(query);
+    }
+
+    public static ResultSet getStateSubsidyByState(String stateName) throws SQLException {
+      String query = "SELECT * FROM StateSubsidies WHERE state_name = ?";
+      Connection con = getConnection();
+      PreparedStatement ps = con.prepareStatement(query);
+      ps.setString(1, stateName);
+      return ps.executeQuery();
+    }
 
     private static double fetchDouble(String query, String param1, String param2) {
         double result = 0.0;
