@@ -41,3 +41,17 @@ public class DatabaseHelper {
        return executeQuery("SELECT panel_id, brand, model_name, power_output, cost_per_panel, length, width FROM SolarPanelModels");
     }
 
+    private static ResultSet executeQuery(String query) throws SQLException {
+        Connection con = getConnection();
+        Statement stmt = con.createStatement();
+        return stmt.executeQuery(query);
+    }
+
+    public static ResultSet getStateSubsidyByState(String stateName) throws SQLException {
+    String query = "SELECT * FROM StateSubsidies WHERE state_name = ?";
+    Connection con = getConnection();
+    PreparedStatement ps = con.prepareStatement(query);
+    ps.setString(1, stateName);
+    return ps.executeQuery();
+    }
+
