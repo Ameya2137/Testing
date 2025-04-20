@@ -1,7 +1,20 @@
-// b12
-// Add this line to prompt the user to press Enter before returning to the main menu
+      try {
+            ResultSet rs = DatabaseHelper.getStateSubsidies();
+            boolean hasData = false;
+
+            while (rs.next()) {
+                if (rs.getString("state_name").equalsIgnoreCase(stateName)) {
+                    hasData = true;
+                    System.out.println("State: " + rs.getString("state_name"));
+                    System.out.println("Subsidy Percentage: " + rs.getFloat("subsidy_percent") + "%");
+                    System.out.println("--------------------------------------");
+                }
+            }
+        // Add this line to prompt the user to press Enter before returning to the main menu
         System.out.println("Press Enter to return to the main menu...");
         scanner.nextLine();  // Wait for user to press Enter
     }
 }
-// b12
+  
+  
+
